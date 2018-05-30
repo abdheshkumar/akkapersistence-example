@@ -1,0 +1,30 @@
+version: '2.1'
+
+services:
+
+  cassandra:
+       image: cassandra:latest
+      # volumes:
+      #     - /var/db/wisestep/cassandra/:/var/lib/cassandra/
+       ports:
+           - 7000:7000
+           - 7001:7001
+           - 7199:7199
+           - 9042:9042
+           - 9160:9160
+       environment:
+           - CASSANDRA_CLUSTER_NAME='cassandra-cluster'
+           - CASSANDRA_NUM_TOKENS=256
+           # - CASSANDRA_LISTEN_ADDRESS=0.0.0.0  # HOSTNAME OR IP OF MACHINE
+           - CASSANDRA_RPC_ADDRESS=0.0.0.0
+       #restart: always
+       healthcheck:
+             test: ["CMD-SHELL", "cassa-is-ready"]
+             interval: 5s
+             timeout: 15s
+             retries: 5
+
+networks:
+  default:
+    external:
+      name: test-ngage-network

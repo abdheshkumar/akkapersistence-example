@@ -11,3 +11,9 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-persistence-cassandra" % "0.84",
   "com.typesafe.akka" %% "akka-persistence-cassandra-launcher" % "0.84" % Test
 )
+
+assemblyOutputPath in assembly := baseDirectory.value / "jars/" / (assemblyJarName in assembly).value
+assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", xs@_*) => MergeStrategy.discard
+  case x => MergeStrategy.first
+}

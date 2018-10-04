@@ -1,4 +1,4 @@
-# akkapersistence-example
+# akka persistence with cluster sharding example
 Steps to run this example:
 
 Step-1: Start cassandra docker(src/main/resources/cassandra.yml) using docker-compose  
